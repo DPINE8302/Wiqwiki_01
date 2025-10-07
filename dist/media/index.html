@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Wiqnnc_’s offline-first knowledge OS. Instant search, cinematic storytelling, zero cloud dependencies."><meta name="theme-color" content="#02060f"><title>Media — Wiqnnc_’s Wiki</title><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="stylesheet" href="/_astro/awards.bVVTf2fS.css"></head> <body data-page="media" data-theme="space" class="app-shell text-base text-[color:var(--color-neutral-100)]"> <header class="sticky top-0 z-20 backdrop-blur-md/80"> <div class="container"> <nav class="flex items-center justify-between py-6 gap-6"> <a href="/" class="font-display text-lg tracking-[0.2em] uppercase focus-ring">
+Wiqnnc_
+</a> <div class="hidden md:flex items-center gap-6 text-sm tracking-wide"> <a class="hover:text-[color:var(--color-gold-200)] transition" href="/bio">Bio</a> <a class="hover:text-[color:var(--color-gold-200)] transition" href="/projects">Projects</a> <a class="hover:text-[color:var(--color-gold-200)] transition" href="/awards">Awards</a> <a class="hover:text-[color:var(--color-gold-200)] transition" href="/repos">Repos</a> <a class="hover:text-[color:var(--color-gold-200)] transition" href="/media">Media</a> </div> <div class="flex items-center gap-3"> <button class="glass-panel focus-ring hidden sm:flex items-center gap-3 px-4 py-2 text-xs uppercase tracking-[0.3em] text-[color:var(--color-neutral-200)]" data-command-trigger aria-label="Open command search (⌘K)"> <span>Search</span> <kbd class="rounded border border-white/20 px-2 py-1">⌘K</kbd> </button> <button class="glass-panel focus-ring flex items-center justify-center px-4 py-2 text-xs uppercase tracking-[0.3em]" data-theme-toggle type="button" aria-label="Toggle theme"> <span data-theme-label>Space</span> </button> </div> </nav> </div> </header> <main class="app-shell__main">  <section class="py-20"> <div class="container space-y-10"> <header class="glass-panel px-8 py-12"> <h1 class="font-display text-3xl text-white">Media Vault</h1> <p class="mt-4 max-w-2xl text-white/70">
+Photography lightbox with EXIF overlays and sticky YouTube mini-players will land
+          soon. For now, featured videos are available via direct embeds below.
+</p> </header> <div class="grid gap-6 md:grid-cols-2"> <article class="glass-panel p-4" key="feature"> <h2 class="font-display text-xl text-white">Feature</h2> <p class="mt-2 text-sm text-white/60">YouTube · BMhot-xCYmk</p> <div class="mt-4 aspect-video overflow-hidden rounded-xl border border-white/10"> <iframe src="https://www.youtube-nocookie.com/embed/BMhot-xCYmk" width="560" height="315" title="Feature" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </div> <a class="mt-4 inline-flex text-white/70 underline decoration-white/30 hover:text-white" href="https://youtu.be/BMhot-xCYmk">
+Watch on YouTube
+</a> </article><article class="glass-panel p-4" key="intro"> <h2 class="font-display text-xl text-white">Intro</h2> <p class="mt-2 text-sm text-white/60">YouTube · iGxayA8Zmoc</p> <div class="mt-4 aspect-video overflow-hidden rounded-xl border border-white/10"> <iframe src="https://www.youtube-nocookie.com/embed/iGxayA8Zmoc" width="560" height="315" title="Intro" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </div> <a class="mt-4 inline-flex text-white/70 underline decoration-white/30 hover:text-white" href="https://youtu.be/iGxayA8Zmoc">
+Watch on YouTube
+</a> </article> </div> </div> </section>  </main> <footer class="border-t border-white/10 py-10 text-sm tracking-wide"> <div class="container flex flex-col gap-2 md:flex-row md:items-center md:justify-between text-white/70"> <span>© 2025 Wiqnnc_. All Rights Reserved. Made with love by Win.</span> <span>© 2025 Kirati Rattanaporn · Bangkok, Thailand · Public-safe full profile · Compiled October 2025 · #Win</span> </div> </footer>  <script type="module">
+      const searchButtons = document.querySelectorAll("[data-command-trigger]");
+      const themeButton = document.querySelector("[data-theme-toggle]");
+      const themeLabel = document.querySelector("[data-theme-label]");
+      const THEME_KEY = "wiqnnc-wiki-theme";
+      const themes = ["space", "heritage"];
+
+      const focusSearch = () => {
+        const searchInput = document.querySelector("#global-search-input");
+        if (searchInput instanceof HTMLInputElement) {
+          searchInput.focus();
+        }
+      };
+
+      const applyTheme = (theme) => {
+        document.body.dataset.theme = theme;
+        if (themeLabel) {
+          themeLabel.textContent = theme === "space" ? "Space" : "Heritage";
+        }
+        try {
+          localStorage.setItem(THEME_KEY, theme);
+        } catch (error) {
+          console.warn("Unable to persist theme", error);
+        }
+      };
+
+      const storedTheme = localStorage.getItem(THEME_KEY);
+      if (storedTheme && themes.includes(storedTheme)) {
+        applyTheme(storedTheme);
+      }
+
+      themeButton?.addEventListener("click", () => {
+        const currentTheme = document.body.dataset.theme === "heritage" ? "heritage" : "space";
+        const nextTheme = currentTheme === "space" ? "heritage" : "space";
+        applyTheme(nextTheme);
+      });
+
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .catch((error) => console.error("Service worker registration failed", error));
+        });
+      }
+      searchButtons.forEach((button) => {
+        button.addEventListener("click", focusSearch);
+      });
+      window.addEventListener("keydown", (event) => {
+        const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0;
+        if ((isMac && event.metaKey) || (!isMac && event.ctrlKey)) {
+          if (event.key.toLowerCase() === "k") {
+            event.preventDefault();
+            focusSearch();
+          }
+        }
+        if (event.key === "/" && document.activeElement !== document.body) {
+          return;
+        }
+        if (event.key === "/") {
+          event.preventDefault();
+          focusSearch();
+        }
+      });
+    </script> </body> </html>

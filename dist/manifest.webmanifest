@@ -1,0 +1,19 @@
+{
+  "name": "Wiqnnc_'s Wiki OS",
+  "short_name": "Wiqnnc_ Wiki",
+  "description": "Offline-first knowledge OS for Kirati \"Win\" Rattanaporn.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#02060f",
+  "theme_color": "#02060f",
+  "lang": "en",
+  "categories": ["education", "portfolio", "productivity"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
