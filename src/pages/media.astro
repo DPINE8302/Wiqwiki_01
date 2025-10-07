@@ -1,0 +1,40 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { wikiData } from "../data/wiki";
+---
+
+<SiteLayout title="Media — Wiqnnc_’s Wiki" pageId="media">
+  <section class="py-20">
+    <div class="container space-y-10">
+      <header class="glass-panel px-8 py-12">
+        <h1 class="font-display text-3xl text-white">Media Vault</h1>
+        <p class="mt-4 max-w-2xl text-white/70">
+          Photography lightbox with EXIF overlays and sticky YouTube mini-players will land
+          soon. For now, featured videos are available via direct embeds below.
+        </p>
+      </header>
+      <div class="grid gap-6 md:grid-cols-2">
+        {wikiData.videos.map((video) => (
+          <article class="glass-panel p-4" key={video.slug}>
+            <h2 class="font-display text-xl text-white">{video.title}</h2>
+            <p class="mt-2 text-sm text-white/60">YouTube · {video.videoId}</p>
+            <div class="mt-4 aspect-video overflow-hidden rounded-xl border border-white/10">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
+                width="560"
+                height="315"
+                title={video.title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              />
+            </div>
+            <a class="mt-4 inline-flex text-white/70 underline decoration-white/30 hover:text-white" href={video.url}>
+              Watch on YouTube
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</SiteLayout>

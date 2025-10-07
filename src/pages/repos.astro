@@ -1,0 +1,54 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { wikiData } from "../data/wiki";
+---
+
+<SiteLayout title="Repositories — Wiqnnc_’s Wiki" pageId="repos">
+  <section class="py-20">
+    <div class="container space-y-10">
+      <header class="glass-panel px-8 py-10">
+        <h1 class="font-display text-3xl text-white">Repositories</h1>
+        <p class="mt-4 max-w-2xl text-white/70">
+          GitHub metadata sync and live previews will arrive after the GraphQL snapshot
+          script is wired. Each record is ready for enrichment by the build process.
+        </p>
+      </header>
+      <div class="grid gap-4 md:grid-cols-2">
+        {wikiData.repositories.map((repo) => (
+          <article
+            class="glass-panel flex flex-col gap-4 px-6 py-5 text-sm text-white/80"
+            key={repo.slug}
+          >
+            <div class="flex items-center justify-between">
+              <h2 class="font-display text-xl text-white">{repo.name}</h2>
+              <span class="rounded-full border border-white/20 px-3 py-1 text-xs uppercase tracking-[0.3em] text-white/40">
+                Repo
+              </span>
+            </div>
+            {repo.summary ? (
+              <p class="text-white/70">{repo.summary}</p>
+            ) : (
+              <p class="text-white/40">
+                Summary pending. Will be auto-filled from GitHub description at build time.
+              </p>
+            )}
+            <a class="text-white/80 underline decoration-white/30 hover:text-white" href={`https://github.com/${repo.repo}`}>
+              {repo.repo}
+            </a>
+            <div class="flex flex-wrap gap-2 text-xs uppercase tracking-[0.35em] text-white/40">
+              {repo.stack.length ? (
+                repo.stack.map((item) => (
+                  <span key={item} class="rounded border border-white/15 px-2 py-1 text-white/60">
+                    {item}
+                  </span>
+                ))
+              ) : (
+                <span class="text-white/30">Stack TBD</span>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</SiteLayout>

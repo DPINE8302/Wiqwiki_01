@@ -1,0 +1,25 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { wikiData } from "../data/wiki";
+---
+
+<SiteLayout title="Biography — Wiqnnc_’s Wiki" pageId="bio">
+  <section class="py-20">
+    <div class="container glass-panel px-8 py-12">
+      <h1 class="font-display text-3xl text-white">Biography</h1>
+      <p class="mt-4 max-w-2xl text-white/70">
+        Detailed biography, timeline, and print-grade PDF export are coming in the next
+        iteration. All profile data is already available in the offline index.
+      </p>
+      <div class="mt-6 text-sm text-white/50">
+        <p>Identity</p>
+        <ul class="mt-2 space-y-1">
+          <li>Name: {wikiData.identity.fullName}</li>
+          <li>Location: {wikiData.identity.location}</li>
+          <li>Pronouns: {wikiData.identity.pronouns}</li>
+          <li>Birth date: {wikiData.identity.birthDate}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

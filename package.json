@@ -1,0 +1,32 @@
+{
+  "name": "wiqnnc-wiki",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Wiqnnc_’s offline-first Wiki OS built with Astro, Tailwind, and React islands.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "npm run build:search && astro build",
+    "build:search": "node ./scripts/generate-search.mjs",
+    "preview": "astro preview",
+    "astro": "astro",
+    "clean": "rimraf dist .astro .wireit public/search-index.json public/search-manifest.json",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.4.0",
+    "@orama/orama": "^3.1.14",
+    "@tailwindcss/vite": "^4.1.14",
+    "astro": "^5.14.1",
+    "framer-motion": "^12.23.22",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.14",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.3"
+  }
+}

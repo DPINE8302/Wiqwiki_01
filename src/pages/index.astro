@@ -1,0 +1,126 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { wikiData } from "../data/wiki";
+import SearchPanel from "../components/search/SearchPanel";
+
+const { identity, about, fields, languages, awards, presence } = wikiData;
+
+const latestAwards = awards.filter((entry) => entry.year === 2024);
+
+const quickLinks = [
+  { label: "Biography Overview", href: "/bio", badge: "Bio" },
+  { label: "Awards Timeline", href: "/awards", badge: "Awards" },
+  { label: "Repositories Heatmap", href: "/repos", badge: "Repos" },
+  { label: "Portfolio Projects", href: "/projects", badge: "Projects" },
+  { label: "Media Lab", href: "/media", badge: "Media" }
+];
+---
+
+<SiteLayout title="Wiqnnc_’s Wiki OS">
+  <section class="py-16 md:py-24">
+    <div class="container flex flex-col gap-10">
+      <div class="flex flex-col gap-6">
+        <p class="text-xs uppercase tracking-[0.35em] text-white/50">
+          Kirati "Win" Rattanaporn · {identity.location} · he/him
+        </p>
+        <div class="max-w-3xl">
+          <h1 class="font-display text-4xl leading-tight text-white md:text-6xl">
+            {identity.motto}
+          </h1>
+          <p class="mt-6 text-lg text-white/70 md:text-xl">
+            {about.headline}
+          </p>
+        </div>
+      </div>
+      <SearchPanel
+        client:load
+        quicklinks={quickLinks}
+        suggestions={[
+          "Bio",
+          "Awards",
+          "Repositories",
+          "Projects",
+          "Feature video",
+          "Language proficiency",
+          ...fields
+        ]}
+      />
+      <div class="grid gap-6 md:grid-cols-[2fr_1fr]">
+        <article class="glass-panel p-8">
+          <h2 class="font-display text-lg uppercase tracking-[0.35em] text-white/60">
+            Storyline
+          </h2>
+          <div class="mt-6 grid gap-6">
+            {about.paragraphs.map((paragraph) => (
+              <p class="text-base text-white/70" key={paragraph}>
+                {paragraph}
+              </p>
+            ))}
+          </div>
+          <div class="mt-8 flex flex-wrap gap-3">
+            {about.identityFocus.map((focus) => (
+              <span
+                class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.3em] text-white/60"
+                key={focus}
+              >
+                {focus}
+              </span>
+            ))}
+          </div>
+        </article>
+        <aside class="glass-panel px-6 py-8 space-y-8">
+          <section>
+            <h3 class="text-xs uppercase tracking-[0.35em] text-white/50">Languages</h3>
+            <ul class="mt-4 space-y-3 text-sm text-white/70">
+              {languages.map((item) => (
+                <li key={item.language} class="flex flex-col">
+                  <span class="font-medium text-white">{item.language}</span>
+                  <span class="text-xs uppercase tracking-[0.3em] text-white/40">
+                    {item.proficiency}
+                  </span>
+                  <span class="text-xs text-white/50">{item.notes}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section>
+            <h3 class="text-xs uppercase tracking-[0.35em] text-white/50">Latest wins</h3>
+            <ul class="mt-4 space-y-2 text-sm text-white/70">
+              {latestAwards.map((award) => (
+                <li key={`${award.year}-${award.title}`} class="rounded-lg border border-white/10 bg-white/5 px-3 py-2">
+                  <span class="font-medium text-white">{award.title}</span>
+                  <div class="text-xs uppercase tracking-[0.3em] text-white/40">
+                    {award.field} · {award.year}
+                  </div>
+                  <div class="text-xs text-white/50">{award.detail}</div>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section>
+            <h3 class="text-xs uppercase tracking-[0.35em] text-white/50">Presence</h3>
+            <ul class="mt-4 space-y-2 text-sm text-white/70">
+              <li>
+                <a class="hover:text-white" href={presence.github.url}>
+                  GitHub · @{presence.github.handle}
+                </a>
+              </li>
+              <li>
+                <a class="hover:text-white" href={presence.youtube.url}>
+                  YouTube · {presence.youtube.handle}
+                </a>
+              </li>
+              {presence.instagram.map((account) => (
+                <li key={account.handle}>
+                  <a class="hover:text-white" href={account.url}>
+                    Instagram · @{account.handle}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </section>
+</SiteLayout>
